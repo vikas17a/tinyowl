@@ -206,6 +206,10 @@ traverse: function (callback) {
 
 
 var searchIn = function find(obj, key){
+	if(obj.length == 0)
+		return null;
+	if(key == null)
+		return null;
 	var keyTree = new BST();
 	for(var i=0; i < obj.length; i++){
 		keyTree.insert(obj[i][key], obj[i]);		
