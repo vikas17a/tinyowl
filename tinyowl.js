@@ -1,11 +1,4 @@
 /*
-* File: bst.js
-*
-* A pure JavaScript implementation of a binary search tree.
-*
-*/
- 
-/*
 * Class: BST
 *
 * The binary search tree class.
@@ -172,8 +165,9 @@ insert: function (key, value) {
 	} else {
 		return insertNode(root, key, value, null);
 	}
-},
+}
 /*
+* !!!!!!!!Not in use!!!!!!!!!!!! only for test 
 * Method: traverse
 *
 * Call a function on each node of a binary tree.
@@ -186,7 +180,7 @@ insert: function (key, value) {
 * Returns:
 * true.
 *
-*/
+*
 traverse: function (callback) {
 	if (typeof callback === "undefined") {
 		callback = function (key, value) {
@@ -194,29 +188,42 @@ traverse: function (callback) {
 		};
 	} 
 	return traverseNode(root, callback);
-}
+}*/
 };
 };
+
+/*
+* Private Class searchIn to create BST of large
+* array of objects
+* Use : Create a Object of class and pass default 
+* params as array of objects and key to be indexed
+* 
+* Public method search to be initiated for 'where useability' 
+* 
+* To use this library create an object of searchIn class and use array and paramater to be indexed in BST
+* Call public method search to find out the key
+*/
+
 
 var searchIn = function find(obj, key){
 	var keyTree = new BST();
 	for(var i=0; i < obj.length; i++){
 		keyTree.insert(obj[i][key], obj[i]);		
 	}
-	//keyTree.traverse(function (key, value) {
-	//	console.log("The value of " + key + " is " + value + ".");
-	//});
 	return{
 		search : function(key){
 			return keyTree.search(key);				
 		}	
 	};			
 };
-
 var arr = new Object();
 arr = [
 	{Name : "Vikas", Value : "2"},
-	{Name: "Simmy", Value : "3"}
-]
+	{Name: "Simmy", Value : "3"},
+	{Name : "Google", Value : "5"},
+	{Name : "India", Value : "77"},
+	{Name : "Samar", Value : "55"}
+];
+
 var searchOp = new searchIn(arr,"Value");
-console.log(searchOp.search("Simmy"));
+console.log(searchOp.search("3"));
