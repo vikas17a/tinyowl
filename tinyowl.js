@@ -143,6 +143,7 @@ search: function (key1, key2) {
 	if (key1 == null || key2 == null) {
 		return undefined;
 	} else {
+		results = [];
 		if(key2 > key1)
 			searchNode(root, key1, key2);
 		else
@@ -238,4 +239,4 @@ arr = [
 
 var searchOp = new searchIn(arr,"Name");
 console.log(searchOp.search("India","Google"));
-
+console.log(searchOp.search("Samar", "Vikas"));
