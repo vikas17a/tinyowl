@@ -19,6 +19,7 @@ var BST = function () {
 *
 * Note: All parameters default to null.
 */
+var results = new Array();
 var Node = function (leftChild, key, value, rightChild, parent) {
 	return {
 		leftChild: (typeof leftChild === "undefined") ? null : leftChild,
@@ -41,28 +42,29 @@ root = new Node(),
 *
 * Parameters:
 * node - the node to search on.
-* key - the key to search for (as an integer).
+* key1 - the key1 to search for lower limit
+* key2 - the key2 to search for upper limit
 *
 * Returns:
-* the value of the found node,
-* or null if no node was found.
+* void type 
 *
 */
-searchNode = function (node, key) {
+
+
+searchNode = function (node, key1, key2) {
 	if (node.key === null) {
-		return null; // key not found
+		return;
 	}
-	var nodeKey =node.key;
- 
-	if (key < nodeKey) {
-		return searchNode(node.leftChild, key);
+	var nodeKey =node.key; 
+	if (key1 < nodeKey) {
+		searchNode(node.leftChild, key1, key2);
+	}
+	if((key1 <= nodeKey) && (key2 >= nodeKey)){
+		results.push(node.value);
 	} 
-	else if (key > nodeKey) {
-		return searchNode(node.rightChild, key);
-	     } 
-	     else { // key is equal to node key
-		return node.value;
-	     }
+	if (key2 > nodeKey) {
+		searchNode(node.rightChild, key1, key2);
+	}
 	},
 /*
 * Private Method: insertNode
@@ -128,7 +130,8 @@ return {
 * Search through a binary tree.
 *
 * Parameters:
-* key - the key to search for.
+* key1 - the key to search for lower limit.
+* key2 - the key to serach for upper limit.
 *
 * Returns:
 * the value of the found node,
@@ -136,11 +139,15 @@ return {
 * or undefined if no key was specified.
 *
 */
-search: function (key) {
-	if (key == null) {
-		return undefined; // key must be a number
+search: function (key1, key2) {
+	if (key1 == null || key2 == null) {
+		return undefined;
 	} else {
-		return searchNode(root, key);
+		if(key2 > key1)
+			searchNode(root, key1, key2);
+		else
+			searchNode(root, key2, key1);
+		return results;
 	}
 },
  
@@ -165,7 +172,7 @@ insert: function (key, value) {
 	} else {
 		return insertNode(root, key, value, null);
 	}
-}
+},
 /*
 * !!!!!!!!Not in use!!!!!!!!!!!! only for test 
 * Method: traverse
@@ -180,7 +187,7 @@ insert: function (key, value) {
 * Returns:
 * true.
 *
-*
+*/
 traverse: function (callback) {
 	if (typeof callback === "undefined") {
 		callback = function (key, value) {
@@ -188,7 +195,7 @@ traverse: function (callback) {
 		};
 	} 
 	return traverseNode(root, callback);
-}*/
+}
 };
 };
 
@@ -215,8 +222,8 @@ var searchIn = function find(obj, key){
 		keyTree.insert(obj[i][key], obj[i]);		
 	}
 	return{
-		search : function(key){
-			return keyTree.search(key);				
+		search : function(key1, key2){
+			return keyTree.search(key1, key2);				
 		}	
 	};			
 };
@@ -229,5 +236,6 @@ arr = [
 	{Name : "Samar", Value : "55"}
 ];
 
-var searchOp = new searchIn(arr,"Value");
-console.log(searchOp.search("3"));
+var searchOp = new searchIn(arr,"Name");
+console.log(searchOp.search("India","Google"));
+
