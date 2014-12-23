@@ -90,9 +90,9 @@ var hash = function newHash(arrayOfString){
 		return result;				
 	};
 	return{
-		searchx : function(string){
+		/*searchx : function(string){
 				return searchHash(string);
-		},
+		},*/
 		search : function(string){
 				searchHash('');
 				var len = string.length;
