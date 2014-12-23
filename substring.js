@@ -62,6 +62,8 @@ Trie.prototype.get = function(name) {
             t = t.next;
         }
     }
+    results[j] = "";
+    return results;
 };
 
 
@@ -75,6 +77,6 @@ dict.put("halt");
 dict.put("ham");
 dict.put("hammer");
 dict.put("halt");
-console.log("t:", dict.get("t"));
+console.log("t:", dict.get("ta"));
 console.log("tr:", dict.get("tr"));
 console.log("ham:", dict.get("ham"));
