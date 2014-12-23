@@ -44,8 +44,7 @@ var hash = function newHash(arrayOfString){
 	/* Remove hash entries function
 	*/
 	var emptyHash = function emptyHash(){
-		for(x in maps)
-			delete maps[x];
+		 maps = {};
 	};
 
 	
@@ -110,10 +109,10 @@ var hash = function newHash(arrayOfString){
 };
 
 var arr = new Array();
-arr = ["hello", "smile", "how", "are", "you", "blue", "green", "red", "hiver", "river"];
+arr = ["hello", "smile", "how", "are", "you", "blue", "bluegreen" ,"green", "red", "hiver", "river"];
 var subHash = new hash(arr);
 console.log(subHash.search('hello'));
-console.log(subHash.search('b'));
+console.log(subHash.search('blueg'));
 console.log(subHash.search('bl'));
 console.log(subHash.search('r'));
 console.log(subHash.search("ve"));
